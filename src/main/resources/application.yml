@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+zuul:
+  routes:
+    application:
+      service-id: application
+      path: /application/**
+      url: http://localhost:8081/
+    authorization:
+      service-id: authorization
+      path: /authorization/**
+      url: http://localhost:8082/
+    statistics:
+      service-id: statistics
+      path: /statistics/**
+      url: http://localhost:8083/
+
+logging:
+  level:
+    org.feeder: DEBUG
+    org.springframework: WARN
+    org.hibernate: WARN
