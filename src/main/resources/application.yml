@@ -6,15 +6,15 @@ zuul:
     application:
       service-id: application
       path: /application/**
-      url: http://localhost:8081/
+      url: http://${application-service:localhost}:8081/
     authorization:
       service-id: authorization
       path: /authorization/**
-      url: http://localhost:8082/
+      url: http://${authorization-service:localhost}:8082/
     statistics:
       service-id: statistics
       path: /statistics/**
-      url: http://localhost:8083/
+      url: http://${statistics-service:localhost}:8083/
 
 logging:
   level:
