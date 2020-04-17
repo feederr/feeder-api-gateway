@@ -3,10 +3,10 @@ server:
 
 zuul:
   routes:
-    application:
+    item:
       service-id: application
-      path: /application/**
-      url: http://${application-service:localhost}:8081/
+      path: /item/**
+      url: http://${application-service:localhost}:8081/item/
     authorization:
       service-id: authorization
       path: /authorization/**
