@@ -7,9 +7,17 @@ zuul:
       service-id: application
       path: /item/**
       url: http://${application-service:localhost}:8081/item/
-    authorization:
+    oauth:
       service-id: authorization
-      path: /authorization/**
+      path: /oauth/**
+      url: http://${authorization-service:localhost}:8082/
+    client:
+      service-id: authorization
+      path: /client/**
+      url: http://${authorization-service:localhost}:8082/
+    user:
+      service-id: authorization
+      path: /user/**
       url: http://${authorization-service:localhost}:8082/
     statistics:
       service-id: statistics
