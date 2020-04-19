@@ -5,22 +5,47 @@ zuul:
   routes:
     item:
       service-id: application
+      sensitiveHeaders:
       path: /item/**
       url: http://${application-service:localhost}:8081/item/
-    oauth:
+    authorize:
       service-id: authorization
-      path: /oauth/**
+      sensitiveHeaders:
+      path: /oauth/authorize
+      url: http://${authorization-service:localhost}:8082/
+    token:
+      service-id: authorization
+      sensitiveHeaders:
+      path: /oauth/token
+      url: http://${authorization-service:localhost}:8082/
+    confirm_access:
+      service-id: authorization
+      sensitiveHeaders:
+      path: /oauth/confirm_access
+      url: http://${authorization-service:localhost}:8082/
+    check_token:
+      service-id: authorization
+      sensitiveHeaders:
+      path: /oauth/check_token
+      url: http://${authorization-service:localhost}:8082/
+    token_key:
+      service-id: authorization
+      sensitiveHeaders:
+      path: /oauth/token_key
       url: http://${authorization-service:localhost}:8082/
     client:
       service-id: authorization
+      sensitiveHeaders:
       path: /client/**
-      url: http://${authorization-service:localhost}:8082/
+      url: http://${authorization-service:localhost}:8082/client/
     user:
       service-id: authorization
+      sensitiveHeaders:
       path: /user/**
-      url: http://${authorization-service:localhost}:8082/
+      url: http://${authorization-service:localhost}:8082/user/
     statistics:
       service-id: statistics
+      sensitiveHeaders:
       path: /statistics/**
       url: http://${statistics-service:localhost}:8083/
 
