@@ -3,11 +3,22 @@ server:
 
 zuul:
   routes:
+
+    ### APPLICATION SERVICE ROUTING ###
+
     item:
       service-id: application
       sensitiveHeaders:
       path: /item/**
       url: http://${application-service:localhost}:8081/item/
+    source:
+      service-id: application
+      sensitiveHeaders:
+      path: /source/**
+      url: http://${application-service:localhost}:8081/source/
+
+    ### AUTHORIZATION SERVICE ROUTING ###
+
     authorize:
       service-id: authorization
       sensitiveHeaders:
@@ -43,6 +54,9 @@ zuul:
       sensitiveHeaders:
       path: /user/**
       url: http://${authorization-service:localhost}:8082/user/
+
+    ### STATISTICS SERVICE ROUTING ###
+
     statistics:
       service-id: statistics
       sensitiveHeaders:
