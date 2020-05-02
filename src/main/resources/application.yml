@@ -2,6 +2,9 @@ server:
   port: 8080
 
 zuul:
+
+  forceOriginalQueryStringEncoding: true
+
   routes:
 
     ### APPLICATION SERVICE ROUTING ###
@@ -54,6 +57,16 @@ zuul:
       sensitiveHeaders:
       path: /user/**
       url: http://${authorization-service:localhost}:8082/user/
+    logout:
+      service-id: authorization
+      sensitiveHeaders:
+      path: /logout/**
+      url: http://${authorization-service:localhost}:8082/logout/
+    role:
+      service-id: authorization
+      sensitiveHeaders:
+      path: /role/**
+      url: http://${authorization-service:localhost}:8082/role/
 
     ### STATISTICS SERVICE ROUTING ###
 
