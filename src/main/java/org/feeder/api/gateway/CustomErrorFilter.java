@@ -55,7 +55,7 @@ public class CustomErrorFilter extends SendErrorFilter {
       out.flush();
     }
 
-    ctx.set(SEND_ERROR_FILTER_RAN);
+    ctx.set(SEND_ERROR_FILTER_RAN); // to prevent execution of SendErrorFilter
 
     return Boolean.TRUE; // it can be null
   }
