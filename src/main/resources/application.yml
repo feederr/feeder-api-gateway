@@ -22,8 +22,13 @@ zuul:
     source:
       service-id: application
       sensitiveHeaders:
-      path: /source/**
-      url: http://${application-service:localhost}:8081/source/
+      path: /category/**
+      url: http://${application-service:localhost}:8081/category/
+    channel:
+      service-id: application
+      sensitiveHeaders:
+      path: /channel/**
+      url: http://${application-service:localhost}:8081/category/
 
     ### AUTHORIZATION SERVICE ROUTING ###
 
