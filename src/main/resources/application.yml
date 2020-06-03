@@ -85,11 +85,16 @@ zuul:
 
     ### STATISTICS SERVICE ROUTING ###
 
-    statistics:
+    item-statistics:
       service-id: statistics
       sensitiveHeaders:
       path: /item-statistics/**
       url: http://${statistics-service:localhost}:8083/item-statistics/
+    channel-statistics:
+      service-id: statistics
+      sensitiveHeaders:
+      path: /channel-statistics/**
+      url: http://${statistics-service:localhost}:8083/channel-statistics/
 
 logging:
   level:
