@@ -88,8 +88,8 @@ zuul:
     statistics:
       service-id: statistics
       sensitiveHeaders:
-      path: /statistics/**
-      url: http://${statistics-service:localhost}:8083/
+      path: /item-statistics/**
+      url: http://${statistics-service:localhost}:8083/item-statistics/
 
 logging:
   level:
