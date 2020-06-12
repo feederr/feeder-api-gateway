@@ -1,4 +1,4 @@
-package org.feeder.api.gateway;
+package org.feeder.api.gateway.exception;
 
 import static org.apache.commons.lang.CharEncoding.UTF_8;
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.ERROR_TYPE;
@@ -7,14 +7,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import com.google.gson.Gson;
 import com.netflix.zuul.context.RequestContext;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
-import lombok.Data;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class CustomErrorFilter extends SendErrorFilter {
 
@@ -44,6 +44,8 @@ public class CustomErrorFilter extends SendErrorFilter {
     HttpServletResponse response = ctx.getResponse();
     String body = buildJsonRepresentation(buildError(exception));
 
+    log.warn("Error occured: {}", body);
+
     try (PrintWriter out = ctx.getResponse().getWriter()) {
 
       out.print(body);
@@ -70,21 +72,5 @@ public class CustomErrorFilter extends SendErrorFilter {
         exceptionHolder.getErrorCause(),
         exceptionHolder.getThrowable().getMessage()
     );
-  }
-
-  @Data
-  public static class ApiError {
-
-    private final HttpStatus status;
-
-    private final String message;
-
-    private final List<String> errors;
-
-    public ApiError(HttpStatus status, String message, String error) {
-      this.status = status;
-      this.message = message;
-      this.errors = List.of(error);
-    }
   }
 }
